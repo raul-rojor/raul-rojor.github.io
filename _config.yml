@@ -36,7 +36,7 @@ social:
   linkedin: raul-rojo-name        # the slug after linkedin.com/in/
   # Shows a "Resume" link in the header and a button on the home page.
   # Keep this filename in sync if you replace the file. Blank hides both links.
-  resume: /images/raul-rojo-name-resume.png
+  resume: /images/raul-rojo-name-resume.pdf
 
 # ─────────────────────────────────────────────────────────────
 #  ANALYTICS  —  optional, leave blank to disable
