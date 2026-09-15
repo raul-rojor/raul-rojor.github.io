@@ -1,0 +1,40 @@
+---
+layout: default
+title: Work
+permalink: /work/
+description: Machine learning and software projects, each deployed and usable.
+---
+
+{%- assign projects = site.projects | sort: "order" -%}
+
+<section class="section section--page">
+  <div class="shell">
+
+    <header class="page-head page-head--wide" data-reveal>
+      <p class="mono eyebrow eyebrow--rule">
+        Work · {{ projects.size }} {% if projects.size == 1 %}project{% else %}projects{% endif %}
+      </p>
+      <h1 class="page-head__title">Things I've built and shipped.</h1>
+      <p class="page-head__tagline">
+        Each project is a live application. Open the demos and try them.
+      </p>
+    </header>
+
+    <div class="grid grid--cards">
+      {% for project in projects %}
+        {% include project-card.html project=project %}
+      {% endfor %}
+    </div>
+
+    <div class="contact-band contact-band--slim" data-reveal>
+      <p class="mono eyebrow">More on the way</p>
+      <p class="contact-band__sub">
+        Work in progress is generally first viewable on GitHub.
+      </p>
+      <a class="btn btn--ghost" href="https://github.com/{{ site.social.github }}" target="_blank" rel="noopener">
+        github.com/{{ site.social.github }} <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+
+  </div>
+</section>

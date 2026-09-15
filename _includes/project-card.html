@@ -1,0 +1,50 @@
+{% comment %}
+  Renders one project card.
+  Usage:  {% include project-card.html project=item %}
+  Data comes from the Markdown file's front matter in /_projects.
+{% endcomment %}
+
+{%- assign p = include.project -%}
+
+<article class="card" data-reveal>
+
+  <div class="card__top">
+    <span class="mono card__index">{{ p.order | prepend: '0' | slice: -2, 2 }}</span>
+    {% if p.status %}<span class="mono pill pill--live">{{ p.status }}</span>{% endif %}
+  </div>
+
+  <h3 class="card__title">
+    <a href="{{ p.url | relative_url }}">{{ p.title }}</a>
+  </h3>
+
+  {% if p.tagline %}<p class="card__tagline">{{ p.tagline }}</p>{% endif %}
+
+  {% if p.highlights %}
+  <ul class="card__highlights">
+    {% for h in p.highlights %}<li>{{ h }}</li>{% endfor %}
+  </ul>
+  {% endif %}
+
+  {% if p.tech %}
+  <ul class="chips" aria-label="Tech stack">
+    {% for t in p.tech %}<li class="mono chip">{{ t }}</li>{% endfor %}
+  </ul>
+  {% endif %}
+
+  <div class="card__actions">
+    {% if p.demo_url %}
+    <a class="btn btn--primary" href="{{ p.demo_url }}" target="_blank" rel="noopener">
+      Live demo <span aria-hidden="true">↗</span>
+    </a>
+    {% endif %}
+    {% if p.repo_url %}
+    <a class="btn btn--ghost" href="{{ p.repo_url }}" target="_blank" rel="noopener">
+      Source <span aria-hidden="true">↗</span>
+    </a>
+    {% endif %}
+    <a class="btn btn--bare" href="{{ p.url | relative_url }}">
+      Read more <span aria-hidden="true">→</span>
+    </a>
+  </div>
+
+</article>

@@ -1,0 +1,132 @@
+---
+layout: default
+title: About
+permalink: /about/
+description: Who I am, what I've worked on, and where I'm going.
+
+# ─────────────────────────────────────────────────────────────
+#  EDUCATION
+# ─────────────────────────────────────────────────────────────
+education:
+  - degree: "B.S. in Mathematics"
+    org: "The University of Texas at Austin"
+    period: "Expected 2028"
+    detail: "4.00 GPA, University Honors."
+
+# ─────────────────────────────────────────────────────────────
+#  TOOLKIT — grouped so it reads as judgment, not a keyword dump.
+# ─────────────────────────────────────────────────────────────
+toolkit:
+  - group: Languages
+    items: [Python, JavaScript]
+  - group: ML & data
+    items: [PyTorch, pytest, Transformers, CNNs, Contrastive Learning, RAG, LLM APIs (Anthropic), Matplotlib, pandas]
+  - group: Tools
+    items: [Git/GitHub, Streamlit, Microsoft Office, Google Workspace]
+  - group: Math Coursework
+    items: ["Linear algebra", "Probability", "Vector Calculus", "Discrete math", "Algebraic structures", "Differential equations"]
+---
+
+<section class="section section--page">
+  <div class="shell">
+
+    <header class="page-head page-head--wide" data-reveal>
+      <p class="mono eyebrow eyebrow--rule">About</p>
+      <h1 class="page-head__title">{{ site.name }}</h1>
+      <p class="page-head__tagline">{{ site.role }} · {{ site.location }}</p>
+    </header>
+
+    <!-- ───────────────── INTRO ───────────────── -->
+    <div class="about-intro" data-reveal>
+      <div class="about-intro__portrait">
+        <div class="frame frame--sm">
+          <img src="{{ site.avatar | relative_url }}" alt="{{ site.name }}" width="360" height="360" loading="lazy">
+          <span class="frame__corner frame__corner--tl" aria-hidden="true"></span>
+          <span class="frame__corner frame__corner--br" aria-hidden="true"></span>
+        </div>
+      </div>
+
+      <div class="prose about-intro__text">
+        <p>
+          I am a mathematics student at UT Austin. I chose it because I enjoy the
+          logical progressions in its theorems. When I first arrived, I planned to
+          continue on a pure mathematics route;
+          however, I couldn't help but notice the monumental impact that AI is
+          having on so many fields. Thankfully, the logic behind machine learning's
+          mechanisms is rooted in the same mathematics I came here for (linear
+          algebra, probability, statistics), so the shift feels natural.
+        </p>
+        <p>
+          My interest narrowed once I started building a model and software myself.
+          Emerging uses for multimodal models got me curious enough to train a
+          small CLIP-style model, on a CPU, which taught me more about how
+          contrastive learning works and what impacts its results. Being a student in
+          a closely related discipline, I want to be a part of the force bringing
+          a world that is responsible and helpful in its AI applications.
+        </p>
+        <p>
+          Two deployed projects in, I am now looking for problems that are faced by
+          people on the ground. I hope to find them through internships, research,
+          or other related projects where the results matter to someone other than
+          me. My priority is to work where I can offer genuine help and learn in
+          the process.
+        </p>
+      </div>
+    </div>
+
+    <!-- ───────────────── EDUCATION ───────────────── -->
+    {% if page.education %}
+    <section class="about-block">
+      <h2 class="mono eyebrow eyebrow--rule" data-reveal>Education</h2>
+
+      <ol class="timeline">
+        {% for school in page.education %}
+        <li class="timeline__item" data-reveal>
+          <span class="timeline__dot" aria-hidden="true"></span>
+          <div class="timeline__head">
+            <h3 class="timeline__role">{{ school.degree }}</h3>
+            <span class="mono timeline__period">{{ school.period }}</span>
+          </div>
+          <p class="timeline__org">{{ school.org }}</p>
+          {% if school.detail %}<p class="timeline__detail">{{ school.detail }}</p>{% endif %}
+        </li>
+        {% endfor %}
+      </ol>
+    </section>
+    {% endif %}
+
+    <!-- ───────────────── TOOLKIT ───────────────── -->
+    {% if page.toolkit %}
+    <section class="about-block">
+      <h2 class="mono eyebrow eyebrow--rule" data-reveal>Toolkit</h2>
+
+      <div class="grid grid--toolkit">
+        {% for group in page.toolkit %}
+        <div class="tool-group" data-reveal>
+          <h3 class="tool-group__title">{{ group.group }}</h3>
+          <ul class="chips">
+            {% for item in group.items %}<li class="mono chip">{{ item }}</li>{% endfor %}
+          </ul>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+
+    <!-- ───────────────── CONTACT ───────────────── -->
+    <div class="contact-band" data-reveal>
+      <p class="mono eyebrow">Say hello</p>
+      <h2 class="contact-band__title">Want to talk?</h2>
+      <p class="contact-band__sub">The best way to reach me is email.</p>
+      <div class="hero__actions hero__actions--center">
+        <a class="btn btn--primary btn--lg" href="mailto:{{ site.social.email }}">
+          {{ site.social.email }}
+        </a>
+        <a class="btn btn--ghost btn--lg" href="{{ '/work/' | relative_url }}">
+          See the work <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>

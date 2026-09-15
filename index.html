@@ -1,49 +1,148 @@
 ---
 layout: default
+body_class: home-body
+
+# ── HERO COPY ──────────────────────────────────────────────
+# Everything shown in the hero lives here so you can edit it in one place.
+hero:
+  eyebrow: Machine learning · Applied math · Software
+  headline_lead: Exploring machine learning
+  headline_accent: and integrating it in software.
+  lede: >-
+    I'm a mathematics student at UT Austin interested in machine learning.
+    My main interest is in improving training efficiency, finding
+    multimodal AI applications, and integrating machine learning into software
+    in a way that keeps designer intentions at the forefront and genuinely adds
+    to the user experience.
+  # Small facts strip under the hero. Edit, add or delete rows freely.
+  facts:
+    - label: Focus
+      value: "Machine learning algorithms and applied mathematics"
+    - label: Studying
+      value: "B.S. Mathematics, 4.00 GPA, UT Austin '28"
+    - label: Status
+      value: "Open to SWE / ML internships and ML research opportunities"
 ---
 
-<div class="posts">
-  {% for post in paginator.posts %}
-    <article class="post">
-      <a href="{{ site.baseurl }}{{ post.url }}">
-        <h1>{{ post.title }}</h1>
+{%- assign projects = site.projects | sort: "order" -%}
 
-        <div>
-          <p class="post_date">{{ post.date | date: "%B %e, %Y" }}</p>
-        </div>
-      </a>
-      <div class="entry">
-        {{ post.excerpt }}
+<!-- ───────────────────────────── HERO ───────────────────────────── -->
+<section class="hero">
+  <div class="shell hero__inner">
+
+    <div class="hero__content">
+      <p class="mono eyebrow eyebrow--rule">{{ page.hero.eyebrow }}</p>
+
+      <h1 class="hero__title">
+        {{ page.hero.headline_lead }}
+        <span class="grad">{{ page.hero.headline_accent }}</span>
+      </h1>
+
+      <p class="hero__lede">{{ page.hero.lede }}</p>
+
+      <div class="hero__actions">
+        <a class="btn btn--primary btn--lg" href="{{ '/work/' | relative_url }}">
+          View the work <span aria-hidden="true">→</span>
+        </a>
+        <a class="btn btn--ghost btn--lg" href="mailto:{{ site.social.email }}">
+          Get in touch
+        </a>
       </div>
 
-      <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a>
-    </article>
-  {% endfor %}
-
-  <!-- pagination -->
-  {% if paginator.total_pages > 1 %}
-  <div class="pagination">
-    {% if paginator.previous_page %}
-      <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&laquo; Prev</a>
-    {% else %}
-      <span>&laquo; Prev</span>
-    {% endif %}
-
-    {% for page in (1..paginator.total_pages) %}
-      {% if page == paginator.page %}
-        <span class="webjeda">{{ page }}</span>
-      {% elsif page == 1 %}
-        <a href="{{ '/' | prepend: site.baseurl | replace: '//', '/' }}">{{ page }}</a>
-      {% else %}
-        <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
+      {% if page.hero.facts %}
+      <dl class="hero__facts">
+        {% for f in page.hero.facts %}
+        <div class="hero__fact">
+          <dt class="mono">{{ f.label }}</dt>
+          <dd>{{ f.value }}</dd>
+        </div>
+        {% endfor %}
+      </dl>
       {% endif %}
-    {% endfor %}
+    </div>
 
-    {% if paginator.next_page %}
-      <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Next &raquo;</a>
-    {% else %}
-      <span>Next &raquo;</span>
-    {% endif %}
+    <div class="hero__portrait">
+      <div class="frame">
+        <img src="{{ site.avatar | relative_url }}" alt="{{ site.name }}" width="440" height="440">
+        <span class="frame__corner frame__corner--tl" aria-hidden="true"></span>
+        <span class="frame__corner frame__corner--br" aria-hidden="true"></span>
+      </div>
+      <p class="mono frame__caption">{{ site.name }} · {{ site.location }}</p>
+    </div>
+
   </div>
-  {% endif %}
-</div>
+</section>
+
+<!-- ─────────────────────────── SELECTED WORK ─────────────────────────── -->
+<section class="section" id="work">
+  <div class="shell">
+
+    <header class="section-head">
+      <p class="mono eyebrow eyebrow--rule">Selected work</p>
+      <h2 class="section-head__title">Deployed Projects</h2>
+      <p class="section-head__sub">
+        The projects below are live: click through and use them yourself.
+      </p>
+    </header>
+
+    <div class="grid grid--cards">
+      {% for project in projects %}
+        {% include project-card.html project=project %}
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+<!-- ───────────────────────────── ABOUT TEASER ───────────────────────────── -->
+<section class="section section--alt" id="about-teaser">
+  <div class="shell">
+
+    <div class="split">
+      <div class="split__lead" data-reveal>
+        <p class="mono eyebrow eyebrow--rule">About me</p>
+        <h2 class="section-head__title">
+          Mathematics undergraduate at UT Austin interested in machine learning.
+        </h2>
+      </div>
+
+      <div class="split__body" data-reveal>
+        <p>
+          As a mathematics student, I'm building a strong foundation in mathematics
+          while exploring machine learning and its applications. I've built projects
+          that integrate AI into app dataflows in meaningful ways and that teach me
+          the ins and outs of machine learning logic. My next step is to gain experience
+          in the machine learning field and learn to be selective about its applications.
+        </p>
+        <a class="btn btn--bare" href="{{ '/about/' | relative_url }}">
+          Read the full story <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ───────────────────────────── CONTACT ───────────────────────────── -->
+<section class="section section--contact" id="contact">
+  <div class="shell shell--narrow">
+    <div class="contact-band" data-reveal>
+      <p class="mono eyebrow">Contact</p>
+      <h2 class="contact-band__title">Let's build something.</h2>
+      <p class="contact-band__sub">
+        Open to internships, research collaborations, and interesting projects.
+      </p>
+      <div class="hero__actions hero__actions--center">
+        <a class="btn btn--primary btn--lg" href="mailto:{{ site.social.email }}">
+          {{ site.social.email }}
+        </a>
+        {% if site.social.resume %}
+        <a class="btn btn--ghost btn--lg" href="{{ site.social.resume | relative_url }}"
+           target="_blank" rel="noopener">
+          Resume <span aria-hidden="true">↗</span>
+        </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>

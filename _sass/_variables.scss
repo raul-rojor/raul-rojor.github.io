@@ -1,27 +1,21 @@
-
 //
-// VARIABLES
+// BREAKPOINTS
+// Colors and spacing live as CSS custom properties in assets/style.scss
+// so they can be inspected and tweaked straight from devtools.
 //
 
-// Colors
-$blue: #4183C4;
+$bp-mobile:  640px;
+$bp-tablet:  900px;
+$bp-desktop: 1100px;
 
-// Grays
-$black: #000;
-$darkerGray: #222;
-$darkGray: #333;
-$gray: #666;
-$lightGray: #eee;
-$white: #fff;
-
-// Font stacks
-$helvetica: Helvetica, Arial, sans-serif;
-$helveticaNeue: "Helvetica Neue", Helvetica, Arial, sans-serif;
-$georgia: Georgia, serif;
-
-// Mobile breakpoints
 @mixin mobile {
-  @media screen and (max-width: 640px) {
-    @content;
-  }
+  @media screen and (max-width: $bp-mobile) { @content; }
+}
+
+@mixin tablet {
+  @media screen and (max-width: $bp-tablet) { @content; }
+}
+
+@mixin desktop-down {
+  @media screen and (max-width: $bp-desktop) { @content; }
 }

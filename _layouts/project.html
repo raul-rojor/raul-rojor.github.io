@@ -1,0 +1,97 @@
+---
+layout: default
+---
+
+<section class="section section--page">
+  <div class="shell shell--narrow">
+
+    <a class="mono back-link" href="{{ '/work/' | relative_url }}">
+      <span aria-hidden="true">←</span> All work
+    </a>
+
+    <header class="page-head" data-reveal>
+      <p class="mono eyebrow">
+        <span class="eyebrow__index">{{ page.order | prepend: '0' | slice: -2, 2 }}</span>
+        {% if page.status %}<span class="pill pill--live">{{ page.status }}</span>{% endif %}
+      </p>
+
+      <h1 class="page-head__title">{{ page.title }}</h1>
+      {% if page.tagline %}<p class="page-head__tagline">{{ page.tagline }}</p>{% endif %}
+
+      {% if page.tech %}
+      <ul class="chips" aria-label="Tech stack">
+        {% for t in page.tech %}<li class="mono chip">{{ t }}</li>{% endfor %}
+      </ul>
+      {% endif %}
+
+      <div class="card__actions">
+        {% if page.demo_url %}
+        <a class="btn btn--primary" href="{{ page.demo_url }}" target="_blank" rel="noopener">
+          Open the live app <span aria-hidden="true">↗</span>
+        </a>
+        {% endif %}
+        {% if page.repo_url %}
+        <a class="btn btn--ghost" href="{{ page.repo_url }}" target="_blank" rel="noopener">
+          Source <span aria-hidden="true">↗</span>
+        </a>
+        {% endif %}
+      </div>
+    </header>
+
+    {% if page.facts %}
+    <dl class="factbar" data-reveal>
+      {% for f in page.facts %}
+      <div class="factbar__item">
+        <dt class="mono">{{ f.label }}</dt>
+        <dd>{{ f.value }}</dd>
+      </div>
+      {% endfor %}
+    </dl>
+    {% endif %}
+
+    {%- comment -%}
+      `cover:` takes either one image path or a list of two, in which case they
+      render side by side. `cover_labels:` and `cover_caption:` are optional.
+    {%- endcomment -%}
+    {% if page.cover %}
+      {%- assign cover_alt = page.title | prepend: "Screenshot of " -%}
+      {%- assign cover_1 = page.cover[0] -%}
+      {%- assign cover_2 = page.cover[1] -%}
+      {%- assign cover_label_1 = page.cover_labels[0] | default: page.cover_label -%}
+      {%- assign cover_label_2 = page.cover_labels[1] -%}
+    <div data-reveal>
+      {% if page.cover.first %}
+        {% include figure-pair.html
+             src1=cover_1 alt1=cover_alt label1=cover_label_1
+             src2=cover_2 alt2=cover_alt label2=cover_label_2
+             caption=page.cover_caption plot=page.cover_plot %}
+      {% else %}
+        {% include figure.html
+             src=page.cover alt=cover_alt label=cover_label_1
+             caption=page.cover_caption plot=page.cover_plot tall=page.cover_tall %}
+      {% endif %}
+    </div>
+    {% endif %}
+
+    <article class="prose" data-reveal>
+      {{ content }}
+    </article>
+
+    {%- assign others = site.projects | where_exp: "item", "item.url != page.url" | sort: "order" -%}
+    {% if others.size > 0 %}
+    <nav class="next-up" aria-label="More projects">
+      <p class="mono eyebrow">Next up</p>
+      <div class="next-up__list">
+        {% for other in others %}
+        <a class="next-up__item" href="{{ other.url | relative_url }}">
+          <span class="next-up__title">{{ other.title }}</span>
+          {% if other.tagline %}<span class="next-up__tagline">{{ other.tagline }}</span>{% endif %}
+          <span class="next-up__arrow" aria-hidden="true">→</span>
+        </a>
+        {% endfor %}
+      </div>
+    </nav>
+    {% endif %}
+
+  </div>
+</section>

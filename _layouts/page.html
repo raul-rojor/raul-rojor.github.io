@@ -2,11 +2,18 @@
 layout: default
 ---
 
-<article class="page">
+<section class="section section--page">
+  <div class="shell shell--narrow">
 
-  <h1>{{ page.title }}</h1>
+    <header class="page-head" data-reveal>
+      {% if page.eyebrow %}<p class="mono eyebrow">{{ page.eyebrow }}</p>{% endif %}
+      <h1 class="page-head__title">{{ page.title }}</h1>
+      {% if page.tagline %}<p class="page-head__tagline">{{ page.tagline }}</p>{% endif %}
+    </header>
 
-  <div class="entry">
-    {{ content }}
+    <div class="prose" data-reveal>
+      {{ content }}
+    </div>
+
   </div>
-</article>
+</section>

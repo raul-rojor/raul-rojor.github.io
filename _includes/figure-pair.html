@@ -1,0 +1,26 @@
+{% comment %}
+  Two images side by side (stacking on mobile) under one shared caption.
+
+  Parameters:
+    src1 / src2      image paths                        (required)
+    alt1 / alt2      descriptions for screen readers    (required)
+    label1 / label2  small mono line inside each frame  (optional)
+    caption          one sentence describing the pair   (optional)
+    plot             true for white-background charts   (optional)
+{% endcomment %}
+
+<figure class="figure figure--pair{% if include.plot %} figure--plot{% endif %}">
+  <div class="figure__grid">
+    <div class="figure__item">
+      <img src="{{ include.src1 | relative_url }}" alt="{{ include.alt1 }}" loading="lazy">
+      {% if include.label1 %}<figcaption class="mono figure__label">{{ include.label1 }}</figcaption>{% endif %}
+    </div>
+    <div class="figure__item">
+      <img src="{{ include.src2 | relative_url }}" alt="{{ include.alt2 }}" loading="lazy">
+      {% if include.label2 %}<figcaption class="mono figure__label">{{ include.label2 }}</figcaption>{% endif %}
+    </div>
+  </div>
+  {% if include.caption %}
+  <figcaption class="figure__caption">{{ include.caption }}</figcaption>
+  {% endif %}
+</figure>

@@ -1,0 +1,23 @@
+{% comment %}
+  A single framed image with an optional caption.
+
+  Parameters:
+    src      image path, e.g. /images/thing.png   (required)
+    alt      description for screen readers       (required)
+    label    small mono line inside the frame     (optional)
+    caption  sentence underneath the frame        (optional)
+    plot     true for white-background charts, so they sit on white  (optional)
+    tall     true to narrow the frame for portrait screenshots       (optional)
+{% endcomment %}
+
+<figure class="figure{% if include.plot %} figure--plot{% endif %}{% if include.tall %} figure--tall{% endif %}">
+  <div class="figure__grid">
+    <div class="figure__item">
+      <img src="{{ include.src | relative_url }}" alt="{{ include.alt }}" loading="lazy">
+      {% if include.label %}<figcaption class="mono figure__label">{{ include.label }}</figcaption>{% endif %}
+    </div>
+  </div>
+  {% if include.caption %}
+  <figcaption class="figure__caption">{{ include.caption }}</figcaption>
+  {% endif %}
+</figure>

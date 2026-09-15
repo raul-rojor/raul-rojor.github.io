@@ -1,0 +1,33 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>{% if page.title %}{{ page.title }} · {{ site.name }}{% else %}{{ site.name }} · {{ site.role }}{% endif %}</title>
+{% seo title=false %}
+
+{% assign page_desc = page.description | default: page.tagline | default: site.description %}
+<meta name="description" content="{{ page_desc | strip_html | strip_newlines | truncate: 200 }}">
+<meta name="author" content="{{ site.author }}">
+
+<meta property="og:site_name" content="{{ site.name }}">
+<meta property="og:type" content="{% if page.layout == 'project' %}article{% else %}website{% endif %}">
+<meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.name }}{% endif %}">
+<meta property="og:description" content="{{ page_desc | strip_html | strip_newlines | truncate: 200 }}">
+<meta property="og:url" content="{{ page.url | absolute_url }}">
+<meta property="og:image" content="{{ page.image | default: site.avatar | absolute_url }}">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="canonical" href="{{ page.url | absolute_url }}">
+<meta name="theme-color" content="#07090d">
+
+<link rel="icon" type="image/svg+xml" href="{{ '/images/favicon.svg' | relative_url }}">
+<link rel="alternate icon" type="image/png" sizes="32x32" href="{{ '/images/favicon-32x32.png' | relative_url }}">
+<link rel="apple-touch-icon" href="{{ '/images/apple-touch-icon.png' | relative_url }}">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+
+<link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
+
+{% include analytics_head.html %}
