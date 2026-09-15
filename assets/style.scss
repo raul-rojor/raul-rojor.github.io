@@ -714,6 +714,9 @@ em, i { font-style: italic; }
 
 .grid--toolkit {
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  /* Cards hug their contents, so a short group next to a long one doesn't
+     inherit a tall row's empty space. */
+  align-items: start;
 }
 
 .card {
